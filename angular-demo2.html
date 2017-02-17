@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>加法计算器</title>
+</head>
+<body ng-app>
+    <input type="text" ng-model="val1"> +
+    <input type="text" ng-model="val2">
+    <input type="button" value="=" ng-click="result = (val1-0) + (+val2-0)">
+    <input type="text" ng-model="result">
+</body>
+<script src="node_modules/angular/angular.js"></script>
+</html>
