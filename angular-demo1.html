@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<!-- 规定，需要在angular管理的代码父元素加上ng-app属性 ng-开头的属性叫指令-->
+<!-- ng-app告诉angular来管理html代码，管理ng-app所在元素及子元素 -->
+<!-- ng-init 进行初始化操作 -->
+<body ng-app ng-init = "val = 1">
+    <!-- ng-model用来获取元素及其值 -->
+    <!-- value的值会被ng-model的val值覆盖 -->
+    <input ng-model="val" type="text" id="num" value="1">
+    <!-- ng-click 用来注册点击事件 -->
+    <input ng-click="val = +val + 1" type="button" id="btn" value="add">
+</body>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+
+</script>
+
+</html>
