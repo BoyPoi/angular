@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <title>通过模块和控制器升级加法计算器</title>
 </head>
+
 <body ng-app="calc" ng-controller="calcController">
     <input type="text" ng-model="A"> +
     <input type="text" ng-model='B'>
@@ -12,17 +14,18 @@
 </body>
 <script src="node_modules/angular/angular.js"></script>
 <script>
-   var calc = angular.medule("my calc",[]);
-   calc.controller('calcController',function($scope){
+    var calc = angular.module("calc", []);
+    calc.controller('calcController', function($scope) {
         //初始化数据模型
         $scope.A = 0;
         $scope.B = 0;
         $scope.result = 0;
 
         //初始化行为模型
-        $scope.add = function () {
-            $scope.result = ($scope.A-0) + ($scope.B-0);
+        $scope.add = function() {
+            $scope.result = ($scope.A - 0) + ($scope.B - 0);
         };
-   });
+    });
 </script>
+
 </html>
