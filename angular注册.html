@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <table ng-app="myApp" border='1' ng-controller="demoController">
+        <tr>
+            <td>用户名：</td>
+            <td>
+                <input type="text" ng-model='username'>
+            </td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td>
+                <input type="password" ng-model='password'>
+            </td>
+        </tr>
+        <tr>
+            <td>确认密码：</td>
+            <td>
+                <input type="password" ng-model='confirm'>
+            </td>
+        </tr>
+        <tr>
+            <td>是否同意：</td>
+            <td>
+                <input type="checkbox" ng-model='isAgree'>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>{{msg}}</td>
+        </tr>
+        <tr>
+            <td>注册按钮：</td>
+            <td>
+                <input type="button" value="注册" ng-click='register()' />
+            </td>
+        </tr>
+    </table>
+</body>
+<script src="node_modules/angular/angular.js"></script>
+<script>
+var app = angular.module('myApp', []);
+
+//控制器
+app.controller('demoController', function($scope) {
+    $scope.username = '';
+    $scope.password = '';
+    $scope.confirm = '';
+    $scope.isAgree = false;
+    $scope.msg = '';
+
+    $scope.register = function() {
+        if ($scope.username.length > 6) {
+            $scope.msg = '用户名太长';
+            return;
+        }
+
+        if ($scope.password !== $scope.confirm) {
+            $scope.msg = '确认密码和密码不相等';
+            return;
+        }
+
+        if (!$scope.isAgree) {
+            $scope.msg = "请同意用户协议";
+            return;
+        }
+
+        var user = new User($scope.username, $scope.password);
+        var result = user.save();
+        if (result) {
+            $scope.msg = '注册成功';
+        } else {
+            $scope.msg = '用户名已注册';
+        }
+    };
+});
+
+
+//module
+function User(username, password) {
+    this.username = username;
+    this.password = password;
+}
+User.prototype.save = function() {
+    //localStorage
+    var data = localStorage.getItem('user') || '[]';
+    var users = JSON.parse(data);
+    for (var i = users.length - 1; i >= 0; i--) {
+        var item = users[i];
+        if (item.username === this.username) {
+            return false;
+        }
+    }
+    users.push({
+        username: this.username,
+        password: this.password
+    });
+    localStorage.setItem('user', JSON.stringify(users));
+    return true;
+};
+</script>
+
+</html>
