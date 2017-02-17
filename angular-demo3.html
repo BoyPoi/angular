@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>js代码来初始数据模型</title>
 </head>
-<body ng-app>
+<body ng-app='myApp' ng-controller="demoController">
     <input type="text" ng-model="user.name"/>
     <p>hello:{{user.name}}</p>
 </body>
@@ -14,7 +14,15 @@
     //模块是应用程序的一个组成单元
     //第一个参数，是模块的名字
     //第二个参数，第二个参数是一个数组，数组中的元素是该模块所依赖的其他模块(如果不传，就是获取该名字的模块)
-    angular.module('myApp',[]);
+    var app = angular.module('myApp',[]);
 
+    //控制器的创建
+    //第一个参数控制器名字
+    //第二个参数，是一个回调函数
+    app.controller('demoController',function($scope){
+        //这里写js代码
+        $scope.user = {};
+        $scope.user.name = "laowang";
+    });
 </script>
 </html>
